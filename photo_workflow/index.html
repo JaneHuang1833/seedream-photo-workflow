@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>户外照片后期工作台</title>
+  <style>
+    :root{color-scheme:light;--ink:#26362e;--muted:#738076;--paper:#f6f5ef;--card:#fffefa;--line:#e3e5dc;--green:#355e48;--green-light:#edf3ed;--amber:#b7793f;--amber-light:#f6ebdd;--red:#b5483a;--shadow:0 10px 28px #28382908}
+    *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.48}button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #d7ab76;outline-offset:3px}button{transition:background .15s,border-color .15s}h1,h2,h3,p{margin:0}h1{font-size:29px;letter-spacing:-.7px;line-height:1.35}h2{font-size:18px;line-height:1.4}h3{font-size:15px}a{color:var(--green)}.shell{max-width:1440px;margin:auto;padding:34px 42px 48px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:2px;color:var(--amber);margin-bottom:8px}.header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:26px}.subtitle{color:var(--muted);margin-top:9px;max-width:650px}.status-pill{display:flex;align-items:center;gap:8px;font-size:12px;padding:9px 13px;background:#fffefa;border:1px solid var(--line);border-radius:30px;white-space:nowrap}.dot{width:7px;height:7px;border-radius:50%;background:#a3aaa1}.status-pill.ready .dot{background:#588362}.status-pill.running .dot{background:var(--amber);animation:pulse 1.3s infinite}.status-pill.error .dot{background:var(--red)}@keyframes pulse{50%{opacity:.4}}.layout{display:grid;grid-template-columns:350px minmax(0,1fr);gap:24px;align-items:start}.panel{background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}.control-panel{padding:23px;position:sticky;top:24px}.section-label{font-size:11px;font-weight:700;letter-spacing:1.3px;color:var(--muted);margin-bottom:10px}.step{display:flex;align-items:center;gap:9px;margin-bottom:15px}.step-num{font-size:11px;border:1px solid #d7ddd2;color:var(--green);border-radius:50%;width:23px;height:23px;display:grid;place-items:center}.styles{display:grid;gap:8px}.style{position:relative;display:block;border:1px solid var(--line);border-radius:11px;padding:12px 13px 12px 39px;cursor:pointer;background:white}.style:has(input:checked){border-color:#9cae96;background:var(--green-light)}.style input{position:absolute;left:14px;top:17px;accent-color:var(--green);margin:0}.style-title{display:block;font-weight:650;font-size:13px}.style-description{display:block;font-size:11px;color:var(--muted);margin-top:3px;line-height:1.55}.folder-rules{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}.folder-rule{padding:9px;background:#f4f0e7;border-radius:8px;font-size:10px;color:#87715b;line-height:1.65}.folder-rule strong{display:block;color:#755b43;font-size:11px;margin-bottom:2px}.divider{height:1px;background:var(--line);margin:23px 0}.field{display:block;margin:12px 0}.field-name{display:block;font-size:12px;font-weight:600;margin-bottom:6px}.text-input{display:block;width:100%;border:1px solid #dce0d6;background:white;border-radius:8px;padding:9px 10px;color:var(--ink);font-size:12px;min-width:0}.text-input::placeholder{color:#98a095}.text-input:disabled{background:#f3f4ef}.hint{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.65}.directory-input{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px}.button{border:1px solid var(--line);background:#fff;border-radius:9px;color:var(--ink);padding:10px 13px;font-size:12px;font-weight:600}.button:hover:not(:disabled){background:#f1f4ed}.button.primary{background:var(--green);border-color:var(--green);color:white}.button.primary:hover:not(:disabled){background:#274b37}.button.subtle{background:transparent}.full{width:100%}.actions{display:grid;gap:9px;margin-top:17px}.test-button{display:flex;justify-content:space-between;align-items:center}.button-note{font-size:10px;font-weight:400;opacity:.8}.config-details summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600}.config-details summary::-webkit-details-marker{display:none}.config-details summary::after{content:'＋';font-size:16px;font-weight:400;color:var(--muted)}.config-details[open] summary::after{content:'−'}.config-state{font-weight:400;font-size:10px;color:var(--muted);margin-left:auto;margin-right:9px}.config-form{padding-top:3px}.privacy{display:flex;gap:8px;font-size:11px;line-height:1.75;color:var(--muted);padding:13px;background:#f1f3ec;border-radius:10px;margin-top:18px}.privacy-icon{color:var(--green);flex-shrink:0}.message{padding:10px 12px;background:var(--green-light);border-radius:8px;font-size:12px;margin-top:12px;overflow-wrap:anywhere}.message.error{color:var(--red);background:#fff0ec}.message[hidden]{display:none}.workspace{min-width:0}.run-panel{padding:23px;margin-bottom:20px}.run-header{display:flex;justify-content:space-between;gap:12px;align-items:center}.run-heading{display:flex;gap:12px;align-items:center}.run-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:var(--amber);background:var(--amber-light);font-size:21px}.run-description{font-size:12px;color:var(--muted);margin-top:3px}.cancel{font-size:11px;padding:8px 10px;color:var(--red);border-color:#e8d4cb}.progress-meta{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted);margin-top:22px;margin-bottom:7px}.progress{height:5px;background:#e8ece2;overflow:hidden;border-radius:10px}.progress-fill{height:100%;width:0;background:var(--green);transition:width .25s;border-radius:10px}.log-details{margin-top:16px}.log-details summary{cursor:pointer;font-size:11px;color:var(--muted)}.logs{font:11px/1.85 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;color:#647063;background:#f4f5ef;border:1px solid #e8ebdf;border-radius:9px;max-height:220px;overflow:auto;padding:12px;margin-top:9px}.results-header{display:flex;justify-content:space-between;align-items:center;margin:26px 2px 13px;gap:10px}.count{font-size:11px;color:var(--muted)}.empty{padding:56px 28px 48px;text-align:center;border:1px dashed #d3dacb;background:#fafbf6;border-radius:17px;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center}.empty-icon{width:62px;height:62px;border-radius:19px;background:#e8eee1;color:#6c8564;display:grid;place-items:center;margin-bottom:17px}.empty h3{font-size:16px;margin-bottom:7px}.empty p{max-width:430px;font-size:12px;color:var(--muted)}.results{display:grid;gap:20px}.result-card{overflow:hidden}.result-header{display:flex;align-items:center;justify-content:space-between;padding:17px 19px;gap:12px}.result-title{font-size:13px;font-weight:650;overflow-wrap:anywhere}.result-sub{display:flex;align-items:center;gap:7px;margin-top:4px;font-size:10px;color:var(--muted)}.tag{border-radius:4px;padding:1px 6px;background:var(--green-light);color:var(--green)}.tag.failed{color:var(--red);background:#fbe8e2}.view-toggle{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden;flex-shrink:0}.view-toggle button{border:0;background:#fffefa;color:var(--muted);font-size:10px;padding:5px 8px}.view-toggle button.active{background:#e8eee2;color:var(--green)}.photos{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e3e6dd}.photo{margin:0;position:relative;background:#ebeee5;min-width:0;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}.photo img{width:100%;height:100%;object-fit:contain;display:block}.photo figcaption{position:absolute;bottom:10px;left:12px;color:#fff;font-size:10px;padding:3px 8px;border-radius:5px;background:#2332269c;backdrop-filter:blur(7px)}.photos.single{grid-template-columns:1fr}.photos.single .photo{aspect-ratio:3/2}.photo[hidden]{display:none}.image-error{font-size:12px;color:var(--muted);padding:30px;position:absolute;text-align:center}.result-body{padding:17px 19px}.summary{font-size:12px;line-height:1.8}.issues{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.issue{font-size:10px;color:#896b4d;background:#f6efe4;border-radius:5px;padding:3px 7px}.strategy{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.strategy summary{font-size:11px;color:var(--green);cursor:pointer}.reasoning{font-size:11px;color:var(--muted);line-height:1.8;margin-top:10px;white-space:pre-wrap}.params{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:10px}.param{background:#f4f5ee;border-radius:6px;padding:7px 9px;overflow-wrap:anywhere}.param-name{display:block;font-size:10px;color:var(--muted)}.param-value{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:4px;display:block}.output-line{margin-top:12px;display:flex;align-items:flex-start;gap:8px;border-top:1px solid var(--line);padding-top:11px}.output-path{font:10px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);overflow-wrap:anywhere;flex:1}.copy-button{background:transparent;border:0;color:var(--green);font-size:10px;padding:0;flex-shrink:0;white-space:nowrap}.download-link{font-size:10px;flex-shrink:0;white-space:nowrap}.error-text{color:var(--red);font-size:12px}.footer{font-size:10px;color:#91998d;text-align:center;margin-top:29px}svg{display:block}
+    @media(min-width:1180px){.shell{padding-top:42px}.layout{grid-template-columns:355px minmax(0,1fr);gap:30px}.run-panel{padding:24px 26px}}@media(max-width:900px){.shell{padding:26px 24px}.layout{grid-template-columns:300px minmax(0,1fr);gap:18px}.control-panel{padding:19px}.run-panel{padding:19px}.result-header{flex-wrap:wrap}.params{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:690px){.shell{padding:22px 16px 34px}.header{gap:12px;flex-wrap:wrap;margin-bottom:20px}h1{font-size:25px}.subtitle{font-size:12px}.status-pill{padding:6px 11px}.layout{display:block}.control-panel{position:static;margin-bottom:19px}.styles{grid-template-columns:1fr}.run-header{align-items:flex-start}.run-icon{display:none}.photos{grid-template-columns:1fr}.photo{aspect-ratio:3/2}.params{grid-template-columns:repeat(2,minmax(0,1fr))}.empty{padding:40px 20px;min-height:230px}.result-header{padding:14px 15px}.result-body{padding:15px}.footer{line-height:1.8}}
+    select{font:inherit}.control-panel{position:static}.prompt{font:11px/1.85 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:10px 0 0;padding:12px;border-radius:8px;background:#f4f5ee;color:#53634e}.usage{font-size:10px;color:var(--muted);margin-top:10px}.result-sub{flex-wrap:wrap}.activation-banner{margin-top:17px;padding:13px 15px;background:var(--amber-light);border:1px solid #ead9c5;border-radius:9px}.activation-banner strong{display:block;color:#875a30;font-size:12px}.activation-banner p{font-size:11px;color:#856a51;margin:5px 0 8px;line-height:1.75}.activation-banner a{font-size:11px;font-weight:600;color:#805527}.job-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.job-stats span{font-size:10px;color:var(--green);background:var(--green-light);border-radius:5px;padding:3px 8px}.near-button{color:#8b592d;border-color:#dcc7ae;background:#faf2e6}.near-button:hover:not(:disabled){background:#f4e7d3}
+  </style>
+  <style>
+    .error-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.error-meta span{font:10px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:#8d4b3e;background:#fff0eb;padding:3px 7px;border-radius:5px;overflow-wrap:anywhere;max-width:100%}.diagnostic{margin-top:12px;padding:11px 12px;border:1px solid #eddcd4;background:#fffbf8;border-radius:8px}.diagnostic summary{font-size:11px;color:#8d4b3e;cursor:pointer}.diagnostic-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 15px;margin:11px 0 0}.diagnostic-fields dt{font-size:10px;color:var(--muted)}.diagnostic-fields dd{font:11px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;margin:2px 0 0;color:#6b554d;overflow-wrap:anywhere}.recovery-hint{font-size:11px;color:var(--muted);line-height:1.8;margin-top:10px}@media(max-width:690px){.diagnostic-fields{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="header">
+      <div><p class="eyebrow">SEEDREAM PHOTO WORKFLOW</p><h1>让秋天，留在照片里。</h1><p class="subtitle">豆包 Seedream 按四类策略完成后期编辑。先用 2K 小测试看效果，让每张照片都有合适的光线与色彩。</p></div>
+      <div class="status-pill" id="connection-status" role="status"><span class="dot" aria-hidden="true"></span><span id="connection-label">正在连接本地工作流</span></div>
+    </header>
+    <div class="layout">
+      <aside class="panel control-panel" aria-label="工作流设置">
+        <div class="step"><span class="step-num">1</span><h2>选择后期风格</h2></div>
+        <div class="styles" role="radiogroup" aria-label="后期风格">
+          <label class="style"><input type="radio" name="style" value="folders" checked><span class="style-title">按文件夹策略（推荐）</span><span class="style-description">按远景、近景、写真、写实选择风格，Seedream 根据原片逐图编辑。</span></label>
+          <label class="style"><input type="radio" name="style" value="natural"><span class="style-title">自然写实</span><span class="style-description">平衡曝光与色彩，保留现场光线和真实肤色。</span></label>
+          <label class="style"><input type="radio" name="style" value="warm"><span class="style-title">秋日暖色 · 轻电影感</span><span class="style-description">温暖秋叶，柔和高光，轻微电影色调；人像肤色保持自然。</span></label>
+          <label class="style"><input type="radio" name="style" value="bright"><span class="style-title">明亮通透</span><span class="style-description">提亮阴影、清理灰雾，让户外画面更干净清爽。</span></label>
+        </div>
+        <div class="folder-rules" id="folder-rules" aria-label="四类文件夹后期策略">
+          <p class="folder-rule"><strong>远景 · 秋意浓</strong>突出秋色与层次，保留自然景物。</p>
+          <p class="folder-rule"><strong>近景 · 浓郁秋色与层次</strong>金黄橙红，明亮主体、暗调背景；不剪贴、不换叶。</p>
+          <p class="folder-rule"><strong>写真 · 透亮明媚</strong>自然肤色、皮肤透亮，光线干净柔和。</p>
+          <p class="folder-rule"><strong>写实 · 人物光亮与秋意</strong>人物更明亮，背景增强秋色；主体优先，保留真实故事感。</p>
+        </div>
+        <div class="divider"></div>
+        <div class="step"><span class="step-num">2</span><h2>选择照片目录</h2></div>
+        <label class="field"><span class="field-name">原片所在文件夹</span><input id="input-dir" class="text-input directory-input" type="text" spellcheck="false" value="" placeholder="填写原片文件夹的完整路径"></label>
+        <p class="hint" id="directory-hint">正在读取目录照片数量。先试 4 张，每个文件夹一张。</p>
+        <p class="hint">成片自动保存到各原片文件夹的“后期”子目录，原片保留。“后期”子目录不再次扫描，也不计入待处理照片数。</p>
+        <label class="field"><span class="field-name">输出分辨率</span><select id="output-size" class="text-input"><option value="2K" selected>2K（推荐）</option><option value="1.5K">1.5K</option><option value="1K">1K</option></select></label>
+        <p class="hint">2K 档位约 400 万像素，保持原片比例。实际成片尺寸会显示在结果卡片中。</p>
+        <label class="field"><span class="field-name">同时处理照片数</span><select id="concurrency" class="text-input"><option value="1">1 张</option><option value="2">2 张</option><option value="3" selected>3 张（推荐）</option><option value="4">4 张</option><option value="6">6 张</option><option value="8">8 张</option></select></label>
+        <p class="hint">批量照片可以并发处理。遇到 429 限流会等待后重试，可降低并发数。</p>
+        <div class="actions">
+          <button id="sample-button" class="button primary full test-button" type="button"><span>先做小测试</span><span class="button-note">4 张 · 每类文件夹 1 张</span></button>
+          <button id="near-button" class="button near-button full" type="button">近景强化小测试 · 2张</button>
+          <button id="all-button" class="button full" type="button">处理全部照片</button>
+        </div>
+        <p id="run-hint" class="hint">保存 API 配置后即可开始。每次图像编辑会产生 Seedream API 调用费用。</p>
+        <div id="action-message" class="message" role="status" aria-live="polite" hidden></div>
+        <div class="divider"></div>
+        <details id="config-details" class="config-details" open>
+          <summary>Seedream API 配置<span id="config-state" class="config-state">待配置</span></summary>
+          <form id="config-form" class="config-form">
+            <label class="field"><span class="field-name">API Key</span><input id="api-key" class="text-input" type="password" autocomplete="new-password" spellcheck="false" placeholder="在此粘贴你的 API Key"></label>
+            <p class="hint">密钥保存到本机 .env，保存后清空输入框。已配置时留空可保留原密钥。</p>
+            <label class="field"><span class="field-name">图像编辑模型 ID</span><input id="model" class="text-input" type="text" spellcheck="false" value="doubao-seedream-5-0-pro-260628"></label>
+            <p class="hint">已有 API Key 不代表模型服务已开通。请在<a href="https://console.volcengine.com/ark" target="_blank" rel="noopener noreferrer">火山方舟控制台</a>开通 Seedream 5.0 Pro，参考<a href="https://docs.volcengine.com/docs/ark/activation-management?lang=zh" target="_blank" rel="noopener noreferrer">官方开通管理文档</a>。修改模型时，密钥留空即可保留已有密钥。</p>
+            <button id="save-button" class="button full" type="submit">保存本地配置</button>
+            <div id="config-message" class="message" role="status" aria-live="polite" hidden></div>
+          </form>
+        </details>
+        <div class="privacy"><span class="privacy-icon" aria-hidden="true">↗</span><p>上传去除 EXIF 的照片，最长边不超过 4096 px。Seedream 重新生成成片，原片始终保留。AI 编辑会尽量保留人物与场景，五官、衣物与背景细节仍需对比检查。</p></div>
+      </aside>
+      <section class="workspace" aria-label="运行状态与照片结果">
+        <div class="panel run-panel">
+          <div class="run-header"><div class="run-heading"><div class="run-icon" aria-hidden="true">✦</div><div><h2 id="job-title">准备好，先看看效果</h2><p id="job-description" class="run-description">小测试会从远景、近景、写真、写实各选一张。</p></div></div><button id="cancel-button" class="button cancel" type="button" disabled>取消任务</button></div>
+          <div id="activation-banner" class="activation-banner" role="alert" hidden><strong>需要开通 Seedream 5.0 Pro 模型服务</strong><p>使用创建当前 API Key 的同一账号，在开通管理中开通 Seedream 5.0 Pro；完成后重新小测试。</p><a href="https://console.volcengine.com/ark" target="_blank" rel="noopener noreferrer">打开火山方舟控制台 ↗</a></div>
+          <div class="progress-meta"><span id="progress-label">等待开始</span><span id="progress-count">0 / 0</span></div>
+          <div class="progress" role="progressbar" aria-label="照片处理进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <div id="job-stats" class="job-stats" aria-label="并发处理状态" hidden></div>
+          <details class="log-details" id="log-details"><summary>查看运行日志</summary><pre class="logs" id="logs">尚无运行日志。</pre></details>
+        </div>
+        <div class="results-header"><h2>后期效果</h2><span class="count" id="result-count">完成后在这里对比</span></div>
+        <p class="hint" style="margin:0 2px 13px">已成功的照片可复用缓存。若成片已生成、仅下载失败，再次运行会重试下载，不会重新生成。</p>
+        <div id="empty-results" class="empty">
+          <div class="empty-icon" aria-hidden="true"><svg width="33" height="33" viewBox="0 0 32 32" fill="none"><rect x="4" y="5" width="24" height="22" rx="4" stroke="currentColor" stroke-width="1.4"/><circle cx="21.5" cy="11.5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="m5 23 7-8 5 5 3-3 7 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>从 4 张照片开始</h3><p>四类文件夹各试一张。Seedream 将按对应策略直接编辑原片。完成后可并排对比原片与成片，展开查看编辑提示词。</p>
+        </div>
+        <div id="results" class="results" aria-live="polite"></div>
+      </section>
+    </div>
+    <p class="footer">Seedream 图像编辑 · 四类策略 · 原片保留　／　运行期间请保持本地工作流服务开启</p>
+  </main>
+  <script>
+    'use strict';
+    const DEFAULT_DIR = '';
+    const DEFAULT_MODEL = 'doubao-seedream-5-0-pro-260628';
+    const elements = Object.fromEntries(['connection-status','connection-label','input-dir','directory-hint','output-size','concurrency','sample-button','near-button','all-button','run-hint','action-message','config-details','config-state','config-form','api-key','model','save-button','config-message','job-title','job-description','cancel-button','progress-label','progress-count','progress-bar','progress-fill','job-stats','logs','log-details','result-count','empty-results','results'].map(id => [id, document.getElementById(id)]));
+    const styleNames = {folders:'按文件夹策略',natural:'自然写实',warm:'秋日暖色 · 轻电影感',bright:'明亮通透'};
+    const categoryNames = {portrait:'人像',person:'人像',people:'人像',landscape:'风景',scenery:'风景',detail:'细节',closeup:'细节',mixed:'人景结合',unknown:'照片'};
+    let state = null;
+    let connected = false;
+    let pendingRun = false;
+    let pendingSave = false;
+    let pendingCancel = false;
+    let cancellationRequested = false;
+    let currentJobId = null;
+    let lastResultsSignature = '';
+    let pollTimer = null;
+    const resultViews = new Map();
+
+    function showMessage(id, message, isError = false) {
+      const target = elements[id];
+      target.textContent = message || '';
+      target.classList.toggle('error', isError);
+      target.hidden = !message;
+    }
+
+    async function api(path, payload) {
+      const response = await fetch(path, payload === undefined ? {cache:'no-store'} : {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok || body.ok === false || body.error) throw new Error(typeof body.error === 'string' ? body.error : body.message || '请求失败，请查看本地服务日志。');
+      return body;
+    }
+
+    function settingsChanged() {
+      return Boolean(elements['api-key'].value.trim()) || Boolean(state && elements.model.value.trim() !== (state.model || DEFAULT_MODEL));
+    }
+
+    function updateButtons() {
+      const busy = Boolean(state && state.busy);
+      const locked = busy || pendingRun || pendingSave;
+      const runnable = connected && Boolean(state && state.configured) && !locked && !settingsChanged() && Boolean(elements['input-dir'].value.trim());
+      elements['sample-button'].disabled = !runnable;
+      elements['near-button'].disabled = !runnable;
+      elements['all-button'].disabled = !runnable;
+      elements['save-button'].disabled = !connected || locked;
+      elements['api-key'].disabled = locked;
+      elements.model.disabled = locked;
+      elements['input-dir'].disabled = locked;
+      elements['output-size'].disabled = locked;
+      elements.concurrency.disabled = locked;
+      document.querySelectorAll('input[name="style"]').forEach(input => {input.disabled = locked;});
+      elements['cancel-button'].disabled = !busy || pendingCancel || cancellationRequested;
+      elements['cancel-button'].textContent = cancellationRequested ? '等待已发出请求结束' : pendingCancel ? '正在取消…' : '取消任务';
+      elements['sample-button'].querySelector('span').textContent = pendingRun ? '正在启动…' : '先做小测试';
+      const sameDirectory = state && elements['input-dir'].value.trim().replace(/\/$/,'') === (state.input_dir || DEFAULT_DIR).replace(/\/$/,'');
+      const available = sameDirectory && state.available_count !== undefined && state.available_count !== null ? Number(state.available_count) : NaN;
+      const countKnown = Number.isInteger(available) && available >= 0;
+      elements['all-button'].textContent = countKnown ? '处理全部 ' + available + ' 张照片' : '处理全部照片';
+      elements['directory-hint'].textContent = (countKnown ? '当前目录共 ' + available + ' 张照片。' : '启动任务时会扫描所选目录。') + '四类小测试各选一张；近景强化测试选两张。';
+      const folderStyle = document.querySelector('input[name="style"]:checked').value === 'folders';
+      document.getElementById('folder-rules').hidden = !folderStyle;
+      elements['run-hint'].textContent = !connected ? '等待本地工作流连接。' : !state.configured ? '保存 API 配置后即可开始。每次图像编辑会产生 Seedream API 调用费用。' : settingsChanged() ? 'API Key 或模型已修改，请先保存配置再开始。' : busy ? '正在并发编辑。取消后已发出的请求会完成，未开始的照片停止。' : '新编辑会产生 Seedream API 费用；相同配置的成功结果可复用。建议先做 2K 小测试。';
+    }
+
+    function safeImageUrl(value) {
+      if (typeof value !== 'string' || !value) return '';
+      try {const url = new URL(value, location.href);return ['http:','https:'].includes(url.protocol) && url.origin === location.origin ? url.href : '';} catch {return '';}
+    }
+
+    function make(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = String(text);
+      return node;
+    }
+
+    function photoFigure(url, label) {
+      const figure = make('figure','photo');
+      const source = safeImageUrl(url);
+      if (source) {
+        const img = make('img');img.src = source;img.alt = label;img.loading = 'lazy';
+        img.addEventListener('error', () => {img.hidden = true;if (!figure.querySelector('.image-error')) figure.append(make('span','image-error','预览暂不可用，请检查输出文件。'));});
+        figure.append(img);
+      } else figure.append(make('span','image-error','暂无预览'));
+      figure.append(make('figcaption','',label));
+      return figure;
+    }
+
+    function createResult(result, index) {
+      const key = result.source || result.name || String(index);
+      const card = make('article','panel result-card');
+      const header = make('div','result-header');
+      const heading = make('div');heading.append(make('h3','result-title',result.name || (result.source || '').split('/').pop() || '照片 ' + (index + 1)));
+      const sub = make('div','result-sub');sub.append(make('span','tag',result.profile_label || categoryNames[result.category] || result.category || '照片'));
+      const failed = result.status === 'failed' || result.status === 'error' || Boolean(result.error);
+      if (failed) sub.append(make('span','tag failed','处理失败'));
+      else sub.append(make('span','',result.profile_label && result.category ? '画面主体：' + (categoryNames[result.category] || result.category) : 'Seedream 图像编辑'));
+      const width = Number(result.width || result.actual_width || result.output_width);
+      const height = Number(result.height || result.actual_height || result.output_height);
+      if (width > 0 && height > 0) sub.append(make('span','',width + ' × ' + height + ' px'));
+      heading.append(sub);header.append(heading);card.append(header);
+      if (result.preview_before || result.preview_after) {
+        const photos = make('div','photos');
+        const before = photoFigure(result.preview_before,'原片');
+        const after = photoFigure(result.preview_after,'后期');
+        photos.append(before,after);
+        const toggle = make('div','view-toggle');toggle.setAttribute('role','group');toggle.setAttribute('aria-label','照片对比方式');
+        const modes = [['side','并排'],['before','原片'],['after','后期']];
+        const buttons = modes.map(([mode,label]) => {
+          const button = make('button','',label);button.type = 'button';
+          button.addEventListener('click', () => {resultViews.set(key,mode);applyMode(mode);});
+          toggle.append(button);return button;
+        });
+        function applyMode(mode) {
+          before.hidden = mode === 'after';after.hidden = mode === 'before';photos.classList.toggle('single', mode !== 'side');
+          buttons.forEach((button,i) => {const active = modes[i][0] === mode;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+        }
+        applyMode(resultViews.get(key) || 'side');header.append(toggle);card.append(photos);
+      }
+      const body = make('div','result-body');
+      if (failed) {
+        body.append(make('p','error-text',result.error || '照片未能完成处理。'));
+        const hasValue = value => ['string','number','boolean'].includes(typeof value) && value !== '';
+        const metadata = [];
+        if (hasValue(result.error_code)) metadata.push('错误码：' + result.error_code);
+        if (hasValue(result.http_status)) metadata.push('HTTP：' + result.http_status);
+        if (hasValue(result.request_id)) metadata.push('Request ID：' + result.request_id);
+        if (metadata.length) {const meta = make('div','error-meta');metadata.forEach(value => meta.append(make('span','',value)));body.append(meta);}
+        const labels = {stage:'失败阶段',exception_type:'异常类型',content_type:'响应类型',response_bytes:'响应字节数',content_encoding:'响应编码',json_line:'JSON 行',json_column:'JSON 列',json_position:'JSON 字符位置'};
+        const diagnostic = result.diagnostic && typeof result.diagnostic === 'object' ? result.diagnostic : {};
+        const fields = Object.keys(labels).filter(name => hasValue(diagnostic[name]));
+        if (fields.length) {
+          const details = make('details','diagnostic');details.append(make('summary','','查看失败诊断'));
+          const list = make('dl','diagnostic-fields');
+          fields.forEach(name => {const item = make('div');item.append(make('dt','',labels[name]),make('dd','',diagnostic[name]));list.append(item);});
+          details.append(list);body.append(details);
+        } else body.append(make('p','recovery-hint','此记录未保存结构化诊断信息，无法仅凭错误摘要确定具体原因。'));
+        body.append(make('p','recovery-hint','重试会复用已成功的照片；若图片已生成、仅下载失败，会只重试下载。请先根据错误码、HTTP 状态和 Request ID 核查失败原因。'));
+      }
+      if (result.summary) body.append(make('p','summary',result.summary));
+      if (Array.isArray(result.issues) && result.issues.length) {const issues = make('div','issues');result.issues.forEach(issue => issues.append(make('span','issue',typeof issue === 'string' ? issue : JSON.stringify(issue))));body.append(issues);}
+      if (result.prompt || result.reasoning || result.usage) {
+        const details = make('details','strategy');details.append(make('summary','','查看编辑提示词与调用记录'));
+        if (result.prompt) details.append(make('pre','prompt',result.prompt));
+        if (result.reasoning) details.append(make('p','reasoning',result.reasoning));
+        if (result.usage && typeof result.usage === 'object') {
+          const usage = result.usage;
+          const entries = [];
+          if (usage.generated_images !== undefined) entries.push('生成图片 ' + usage.generated_images + ' 张');
+          if (usage.total_tokens !== undefined) entries.push('总 token ' + usage.total_tokens);
+          if (entries.length) details.append(make('p','usage','API 记录：' + entries.join(' · ')));
+        }
+        body.append(details);
+      }
+      if (result.output) {
+        const line = make('div','output-line');line.append(make('span','output-path','成片保存位置：' + result.output));
+        const copy = make('button','copy-button','复制路径');copy.type = 'button';
+        copy.addEventListener('click', async () => {try {await navigator.clipboard.writeText(result.output);copy.textContent = '已复制';setTimeout(() => {copy.textContent = '复制路径';},2000);} catch {copy.textContent = '请手动复制';}});line.append(copy);
+        if (result.download) {const url = safeImageUrl(result.download);if(url) {const download = make('a','download-link','下载');download.href = url;download.download = '';line.append(download);}}
+        body.append(line);
+      }
+      card.append(body);return card;
+    }
+
+    function renderResults(job) {
+      const results = job && Array.isArray(job.results) ? job.results : [];
+      const signature = JSON.stringify(results);
+      if (signature === lastResultsSignature) return;
+      lastResultsSignature = signature;
+      const opened = new Set(Array.from(elements.results.querySelectorAll('.result-card')).map((card,i) => card.querySelector('details[open]') ? i : -1));
+      elements.results.replaceChildren(...results.map((result,i) => {const card = createResult(result,i);if (opened.has(i) && card.querySelector('details')) card.querySelector('details').open = true;return card;}));
+      elements['empty-results'].hidden = results.length > 0;
+      const success = results.filter(result => !result.error && !['failed','error'].includes(result.status)).length;
+      const errors = results.length - success;
+      elements['result-count'].textContent = results.length ? success + ' 张完成' + (errors ? ' · ' + errors + ' 张失败' : '') : '完成后在这里对比';
+    }
+
+    function renderState(next) {
+      const firstLoad = state === null;
+      state = next;connected = true;
+      if (firstLoad) {
+        elements.model.value = next.model || DEFAULT_MODEL;
+        elements['input-dir'].value = next.input_dir || DEFAULT_DIR;
+        elements['config-details'].open = !next.configured;
+      }
+      elements['config-state'].textContent = next.configured ? '已保存' : '待配置';
+      elements['api-key'].placeholder = next.configured ? '已配置 · 留空保留原密钥' : '在此粘贴你的 API Key';
+      elements['connection-status'].className = 'status-pill ' + (next.busy ? 'running' : next.configured ? 'ready' : '');
+      elements['connection-label'].textContent = next.busy ? 'Seedream 正在编辑' : next.configured ? 'Seedream 已配置 · 本地就绪' : '本地已连接 · 等待 API Key';
+      const job = next.job;
+      const jobStats = [];
+      if (job && job.concurrency !== undefined) jobStats.push('并发上限 ' + job.concurrency);
+      if (job && job.active !== undefined) jobStats.push('处理中 ' + job.active);
+      if (job && job.queued !== undefined) jobStats.push('排队 ' + job.queued);
+      if (job) jobStats.push('已处理 ' + (Number(job.processed) || 0));
+      elements['job-stats'].replaceChildren(...jobStats.map(label => make('span','',label)));
+      elements['job-stats'].hidden = !jobStats.length;
+      const activationErrors = job ? [job.error || '', ...(Array.isArray(job.logs) ? job.logs : []), ...(Array.isArray(job.results) ? job.results.map(result => result.error || '') : [])] : [];
+      document.getElementById('activation-banner').hidden = !activationErrors.some(value => /ModelNotOpen/i.test(String(value)));
+      if (job && job.id !== currentJobId) {currentJobId = job.id;cancellationRequested = false;resultViews.clear();lastResultsSignature = '';}
+      if (job) {
+        const titles = {running:'Seedream 正在编辑照片',queued:'任务已启动',completed:'这组照片，后期完成',done:'这组照片，后期完成',cancelled:'任务已取消',canceled:'任务已取消',failed:'任务遇到了问题',error:'任务遇到了问题',cancelling:'等待已发出请求结束'};
+        const total = Number(job.total) || 0;
+        const processed = Number(job.processed) || 0;
+        const percentage = total ? Math.min(100,Math.round(processed / total * 100)) : 0;
+        elements['job-title'].textContent = titles[job.status] || (next.busy ? '正在处理照片' : '任务已结束');
+        elements['job-description'].textContent = (styleNames[job.style] || job.style || '自动后期') + (job.size ? ' · ' + job.size + ' 成片' : '') + ' · 保存到原片文件夹/后期 · 原片保留';
+        elements['progress-label'].textContent = next.busy ? (cancellationRequested ? '等待已发出的请求完成' : '准备照片 → Seedream 并发编辑 → 保存成片') : ['completed','done'].includes(job.status) ? '已完成，可在下方查看效果与细节' : ['cancelled','canceled'].includes(job.status) ? '已完成的照片保留，后续照片已停止' : '请查看运行日志';
+        elements['progress-count'].textContent = processed + ' / ' + total;
+        elements['progress-fill'].style.width = percentage + '%';
+        elements['progress-bar'].setAttribute('aria-valuenow',String(percentage));
+        const logs = Array.isArray(job.logs) ? job.logs.join('\n') : '尚无运行日志。';
+        if (elements.logs.textContent !== logs) {const wasAtBottom = elements.logs.scrollHeight - elements.logs.scrollTop - elements.logs.clientHeight < 35;elements.logs.textContent = logs || '尚无运行日志。';if(wasAtBottom) elements.logs.scrollTop = elements.logs.scrollHeight;}
+        if (['failed','error'].includes(job.status)) elements['log-details'].open = true;
+      }
+      renderResults(job);updateButtons();
+    }
+
+    async function refresh() {
+      try {renderState(await api('/api/state'));}
+      catch (error) {connected = false;elements['connection-status'].className = 'status-pill error';elements['connection-label'].textContent = '本地服务暂时无法连接';updateButtons();}
+    }
+
+    async function poll() {await refresh();pollTimer = setTimeout(poll,2000);}
+
+    elements['config-form'].addEventListener('submit', async event => {
+      event.preventDefault();if (pendingSave || (state && state.busy)) return;
+      const model = elements.model.value.trim();const inputDir = elements['input-dir'].value.trim();
+      if (!model || !inputDir) {showMessage('config-message','请填写模型 ID 和照片目录。',true);return;}
+      if (!state?.configured && !elements['api-key'].value.trim()) {showMessage('config-message','请粘贴豆包 API Key 后保存。',true);return;}
+      pendingSave = true;showMessage('config-message','正在保存到本机…');updateButtons();
+      try {
+        const response = await api('/api/config',{api_key:elements['api-key'].value.trim(),model,input_dir:inputDir});
+        elements['api-key'].value = '';
+        showMessage('config-message',response.message || '配置已保存，可以开始小测试。');
+        await refresh();
+      } catch (error) {showMessage('config-message',error.message,true);}
+      finally {pendingSave = false;updateButtons();}
+    });
+
+    async function run(scope) {
+      if (pendingRun || pendingSave || state?.busy || !state?.configured || settingsChanged()) return;
+      const inputDir = elements['input-dir'].value.trim();
+      if (!inputDir) {showMessage('action-message','请填写照片目录。',true);return;}
+      pendingRun = true;cancellationRequested = false;showMessage('action-message','正在启动后期工作流…');updateButtons();
+      try {
+        const selectedStyle = scope === 'near_test' ? 'folders' : document.querySelector('input[name="style"]:checked').value;
+        await api('/api/run',{scope,style:selectedStyle,size:elements['output-size'].value,concurrency:Number(elements.concurrency.value),input_dir:inputDir});
+        showMessage('action-message','任务已启动，结果会逐张出现在右侧。');
+        await refresh();
+      } catch (error) {showMessage('action-message',error.message,true);}
+      finally {pendingRun = false;updateButtons();}
+    }
+
+    elements['sample-button'].addEventListener('click', () => run('sample'));
+    elements['near-button'].addEventListener('click', () => run('near_test'));
+    elements['all-button'].addEventListener('click', () => run('all'));
+    elements['cancel-button'].addEventListener('click', async () => {
+      if (!state?.busy || pendingCancel || cancellationRequested) return;
+      pendingCancel = true;updateButtons();
+      try {await api('/api/cancel',{});cancellationRequested = true;showMessage('action-message','已请求取消。已发出的 API 请求会完成，未开始的照片停止；已完成的成片保留。');await refresh();}
+      catch (error) {showMessage('action-message',error.message,true);}
+      finally {pendingCancel = false;updateButtons();}
+    });
+    ['api-key','model','input-dir'].forEach(id => elements[id].addEventListener('input',updateButtons));
+    document.querySelectorAll('input[name="style"]').forEach(input => input.addEventListener('change',updateButtons));
+    window.addEventListener('beforeunload', () => {clearTimeout(pollTimer);});
+    updateButtons();poll();
+  </script>
+</body>
+</html>

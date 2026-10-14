@@ -1,0 +1,14 @@
+.env
+.env-*
+.venv/
+__pycache__/
+outputs/
+previews/
+logs/
+.runtime/
+.DS_Store
+
+# Credentials and local runtime data
+.env.*
+!.env.example
+*.pyc
